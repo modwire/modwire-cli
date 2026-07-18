@@ -11,6 +11,7 @@ from rich.console import Console
 class ReportPipelineContext:
     reports: tuple[ReportNode, ...]
     console: Console
+    summary: bool = False
     failed: bool = False
 
     def has_report(self, report_type: type[ReportNode]) -> bool:
