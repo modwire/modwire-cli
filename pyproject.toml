@@ -1,0 +1,84 @@
+[build-system]
+requires = ["hatchling>=1.28", "hatch-vcs>=0.5"]
+build-backend = "hatchling.build"
+
+[project]
+name = "modwire-cli"
+dynamic = ["version"]
+description = "Command-line interface for the Modwire ecosystem."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [{ name = "Tomasz Szpak" }]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development",
+]
+keywords = ["cli", "modwire"]
+dependencies = [
+    "modwire-architecture>=6,<7",
+    "modwire-extraction>=2,<3",
+    "pydantic-yaml>=1.7",
+    "rich>=13",
+    "wireup>=2.12.0",
+]
+
+[project.scripts]
+modwire = "modwire_cli.__main__:main"
+
+[project.optional-dependencies]
+dev = [
+    "build>=1.3",
+    "pytest>=9",
+    "ruff>=0.14",
+    "twine>=6",
+]
+
+[project.urls]
+Homepage = "https://github.com/modwire/modwire-cli"
+Repository = "https://github.com/modwire/modwire-cli"
+Issues = "https://github.com/modwire/modwire-cli/issues"
+
+[dependency-groups]
+dev = [
+    "build>=1.3",
+    "pytest>=9",
+    "ruff>=0.14",
+    "twine>=6",
+]
+
+[tool.hatch.version]
+source = "vcs"
+tag-pattern = '^v(?P<version>\d+\.\d+\.\d+)$'
+fallback-version = "0.0.0"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/modwire_cli/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/modwire_cli"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "tests", "README.md", "LICENSE", "pyproject.toml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-config", "--strict-markers"]
+filterwarnings = ["error"]
+
+[tool.ruff]
+line-length = 120
+extend-exclude = ["**/_version.py"]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]

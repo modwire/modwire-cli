@@ -1,0 +1,29 @@
+boundaries:
+  tags:
+    - name: package
+      match: src/modwire_cli
+  flow:
+    module_tag: package
+    analyzers:
+      - module-boundaries
+      - no-cycles
+      - no-reentry
+shape:
+  max_classes_per_file: 1
+  max_interfaces_per_file: 0
+  max_types_per_file: 0
+  max_abstract_classes_per_file: 1
+  max_functions_per_file: 2
+  max_methods_per_class: 4
+  max_declared_args: 4
+  max_function_lines: 30
+  max_method_lines: 30
+  max_class_lines: 80
+  allow_optional_function_args: false
+  allow_optional_method_args: false
+  allow_optional_class_properties: false
+  allow_import_aliases: false
+  require_joined_imports: true
+  allowed_import_crossing_types:
+    - module
+    - symbol
