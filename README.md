@@ -21,6 +21,12 @@ and analyses the current directory. Override either path when needed:
 modwire --language typescript --dot-dir path/to/.modwire --architecture-root path/to/source
 ```
 
+Use `--summary` for a compact module → layer map that omits individual source files:
+
+```sh
+modwire --language python --summary
+```
+
 To check this repository's architecture:
 
 ```sh

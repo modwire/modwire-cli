@@ -23,8 +23,9 @@ class FitnessFacade:
         dot_dir: Path,
         architecture_root: Path,
         language: str,
+        summary: bool = False,
     ) -> int:
         config = self.config_service.load(dot_dir)
         code_map = self.extraction_service.load(architecture_root, language)
         reports = Modwire().architecture(config).report(code_map)
-        return self.pipeline_runner.run(reports)
+        return self.pipeline_runner.run(reports, summary=summary)

@@ -22,6 +22,11 @@ def run(argv: Sequence[str]) -> int:
     parser.add_argument("--dot-dir", type=Path, default=Path(".modwire"))
     parser.add_argument("--architecture-root", type=Path, default=Path("."))
     parser.add_argument("--language", required=True)
+    parser.add_argument(
+        "--summary",
+        action="store_true",
+        help="Render modules with their non-empty layers, without individual files.",
+    )
     arguments = parser.parse_args(argv)
 
     container = create_sync_container(
@@ -33,6 +38,7 @@ def run(argv: Sequence[str]) -> int:
             dot_dir=arguments.dot_dir,
             architecture_root=arguments.architecture_root,
             language=arguments.language,
+            summary=arguments.summary,
         )
     finally:
         container.close()

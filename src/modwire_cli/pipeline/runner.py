@@ -17,8 +17,8 @@ class ReportPipelineRunner:
     steps: Mapping[Hashable, ReportPipelineStep]
     console: Console
 
-    def run(self, reports: tuple[ReportNode, ...]) -> int:
-        context = ReportPipelineContext(reports=reports, console=self.console)
+    def run(self, reports: tuple[ReportNode, ...], *, summary: bool = False) -> int:
+        context = ReportPipelineContext(reports=reports, console=self.console, summary=summary)
         result = self.process(context)
         return int(result.failed)
 
